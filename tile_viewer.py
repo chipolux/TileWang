@@ -1,4 +1,8 @@
+import os
 import sys
+
+
+UI_DIR = os.path.join(os.path.dirname(__file__), 'app', 'ui')
 
 
 def run():
@@ -6,7 +10,7 @@ def run():
     from PyQt5.QtQml import QQmlApplicationEngine
 
     app = QGuiApplication(sys.argv)
-    app.setWindowIcon(QIcon('app/ui/tile-viewer.ico'))
+    app.setWindowIcon(QIcon(os.path.join(UI_DIR, 'tile-viewer.ico')))
 
     # if we don't set our app as the engines parent it may not die when our
     # application is shutdown and can cause crashes during exit if it tries to
@@ -17,7 +21,7 @@ def run():
     # deletion for when the app is quitting.
     app.aboutToQuit.connect(engine.deleteLater)
 
-    engine.load('app/ui/TileViewer.qml')
+    engine.load(os.path.join(UI_DIR, 'TileViewer.qml'))
     views = engine.rootObjects()
     if not views:
         sys.exit(1)
