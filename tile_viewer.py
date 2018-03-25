@@ -5,7 +5,7 @@ def run():
     from PyQt5.QtGui import QGuiApplication, QIcon
     from PyQt5.QtQml import QQmlApplicationEngine
 
-    import resources  # noqa
+    from app import resources  # noqa
 
     app = QGuiApplication(sys.argv)
     app.setWindowIcon(QIcon(':/tile-viewer.ico'))
