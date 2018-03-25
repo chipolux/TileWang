@@ -24,6 +24,18 @@ ApplicationWindow {
         onAccepted: tileSet.source = fileUrl
     }
 
+    Rectangle {
+        id: controlsBackground
+        color: "lemonchiffon"
+        opacity: 0.98
+
+        anchors.top: parent.top
+        anchors.bottom: tileSizeRow.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottomMargin: -15
+    }
+
     Column {
         id: infoColumn
         spacing: 5
@@ -134,11 +146,11 @@ ApplicationWindow {
     }
 
     ScrollView {
-        clip: true
+        z: -1
         contentWidth: tileSet.sourceSize.width * scaleSelector.currentText
         contentHeight: tileSet.sourceSize.height * scaleSelector.currentText
 
-        anchors.top: tileSizeRow.bottom
+        anchors.top: controlsBackground.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottom: parent.bottom
