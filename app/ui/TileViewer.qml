@@ -88,36 +88,88 @@ ApplicationWindow {
         anchors.margins: 10
     }
 
-    Image {
-        id: tileSet
-        smooth: false
-        width: sourceSize.width * scaleSelector.currentText
-        height: sourceSize.height * scaleSelector.currentText
+    Row {
+        id: tileSizeRow
 
-        property int rows: height / (rowSpacing * scaleSelector.currentText)
-        property int cols: width / (colSpacing * scaleSelector.currentText)
-
-        anchors.top: infoColumn.bottom
-        anchors.left: parent.left
+        anchors.top: scaleSelector.bottom
+        anchors.right: parent.right
         anchors.margins: 10
 
-        Grid {
-            rows: tileSet.rows
-            columns: tileSet.cols
+        TextField {
+            id: tileWidth
+            text: "16"
+            width: 75
+            horizontalAlignment: Text.AlignHCenter
+        }
 
-            Repeater {
-                model: tileSet.rows * tileSet.cols
+        Label {
+            text: "x"
+            width: 20
+            horizontalAlignment: Text.AlignHCenter
+            anchors.verticalCenter: parent.verticalCenter
+        }
 
-                Rectangle {
-                    width: colSpacing * scaleSelector.currentText
-                    height: rowSpacing * scaleSelector.currentText
-                    color: "transparent"
-                    border.width: 2
-                    border.color: currentIndex == index ? "orange" : "black"
+        TextField {
+            id: tileHeight
+            text: "16"
+            width: 75
+            horizontalAlignment: Text.AlignHCenter
+        }
 
-                    MouseArea {
-                        onClicked: currentIndex = index
-                        anchors.fill: parent
+        Image {
+            source: "done_black.svg"
+            width: 30
+            height: 30
+            anchors.verticalCenter: parent.verticalCenter
+
+            MouseArea {
+                onClicked: {
+                    colSpacing = tileWidth.text
+                    rowSpacing = tileHeight.text
+                }
+                anchors.fill: parent
+            }
+        }
+    }
+
+    ScrollView {
+        clip: true
+        contentWidth: tileSet.sourceSize.width * scaleSelector.currentText
+        contentHeight: tileSet.sourceSize.height * scaleSelector.currentText
+
+        anchors.top: tileSizeRow.bottom
+        anchors.left: parent.left
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.margins: 10
+
+        Image {
+            id: tileSet
+            smooth: false
+            width: sourceSize.width * scaleSelector.currentText
+            height: sourceSize.height * scaleSelector.currentText
+
+            property int rows: height / (rowSpacing * scaleSelector.currentText)
+            property int cols: width / (colSpacing * scaleSelector.currentText)
+
+            Grid {
+                rows: tileSet.rows
+                columns: tileSet.cols
+
+                Repeater {
+                    model: tileSet.rows * tileSet.cols
+
+                    Rectangle {
+                        width: colSpacing * scaleSelector.currentText
+                        height: rowSpacing * scaleSelector.currentText
+                        color: "transparent"
+                        border.width: 2
+                        border.color: currentIndex == index ? "orange" : "black"
+
+                        MouseArea {
+                            onClicked: currentIndex = index
+                            anchors.fill: parent
+                        }
                     }
                 }
             }
