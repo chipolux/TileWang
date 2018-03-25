@@ -79,7 +79,8 @@ ApplicationWindow {
 
     ComboBox {
         id: scaleSelector
-        model: [1, 2, 3, 4, 5]
+        model: [0.5, 0.75, 1, 2, 3, 4, 5]
+        currentIndex: 2
         displayText: "Scale: %1x".arg(currentText)
         width: 200
 
