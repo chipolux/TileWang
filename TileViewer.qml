@@ -68,20 +68,20 @@ ApplicationWindow {
     Button {
         id: loadImageButton
         text: "Load Image"
+        width: 200
 
         onClicked: fileDialog.open()
 
         anchors.top: parent.top
-        anchors.left: scaleSelector.left
         anchors.right: parent.right
-        anchors.topMargin: 10
-        anchors.rightMargin: 10
+        anchors.margins: 10
     }
 
     ComboBox {
         id: scaleSelector
         model: [1, 2, 3, 4, 5]
         displayText: "Scale: %1x".arg(currentText)
+        width: 200
 
         anchors.top: loadImageButton.bottom
         anchors.right: parent.right
