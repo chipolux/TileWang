@@ -19,3 +19,4 @@ clean:
 	rm -f resources.py
 	rm -f *.qmlc
 	rm -rf __pycache__
+	rm -rf build
