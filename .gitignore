@@ -1,2 +1,2 @@
-app/resources.py
 build
+*.qmlc

@@ -1,6 +1,0 @@
-<RCC>
-  <qresource prefix="/">
-    <file>TileViewer.qml</file>
-    <file>tile-viewer.ico</file>
-  </qresource>
-</RCC>
