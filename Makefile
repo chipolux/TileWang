@@ -6,8 +6,8 @@ run:
 demo:
 	qmlscene app/ui/TileViewer.qml
 
-.PHONY: build
-build:
+.PHONY: installer
+installer: clean
 	python -m nsist installer.cfg
 
 .PHONY: clean
