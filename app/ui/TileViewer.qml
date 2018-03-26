@@ -176,8 +176,8 @@ ApplicationWindow {
                         width: colSpacing * scaleSelector.currentText
                         height: rowSpacing * scaleSelector.currentText
                         color: "transparent"
-                        border.width: 2
-                        border.color: currentIndex == index ? "orange" : "black"
+                        border.width: currentIndex == index ? 4 : 2
+                        border.color: currentIndex == index ? "orange" : "darkslateblue"
 
                         MouseArea {
                             onClicked: currentIndex = index
