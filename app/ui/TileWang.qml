@@ -4,7 +4,7 @@ import QtQuick.Dialogs 1.2
 
 
 ApplicationWindow {
-    title: "Tile Viewer"
+    title: "TileWang"
     minimumWidth: 1280
     minimumHeight: 720
 

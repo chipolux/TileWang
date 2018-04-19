@@ -1,10 +1,10 @@
 .PHONY: run
 run:
-	python tile_viewer.py
+	python tilewang.py
 
 .PHONY: demo
 demo:
-	qmlscene app/ui/TileViewer.qml
+	qmlscene app/ui/TileWang.qml
 
 .PHONY: installer
 installer: clean
