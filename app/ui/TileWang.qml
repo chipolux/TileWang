@@ -17,6 +17,11 @@ ApplicationWindow {
     property int currentCol: currentIndex % cols
     property int currentRow: currentIndex / cols
 
+    function setTileSize() {
+        colSpacing = tileWidth.text;
+        rowSpacing = tileHeight.text;
+    }
+
     FileDialog {
         id: fileDialog
         selectMultiple: false
@@ -112,7 +117,7 @@ ApplicationWindow {
         model: [0.5, 0.75, 1, 2, 3, 4, 5]
         currentIndex: 2
         displayText: "Scale: %1x".arg(currentText)
-        width: 195 - reloadButton.width
+        width: 190 - reloadButton.width
         font.pixelSize: fontSize
 
         anchors.top: parent.top
@@ -133,6 +138,8 @@ ApplicationWindow {
             width: 70
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: fontSize
+
+            onEditingFinished: setTileSize()
         }
 
         Label {
@@ -149,6 +156,8 @@ ApplicationWindow {
             width: 70
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: fontSize
+
+            onEditingFinished: setTileSize()
         }
 
         Item {
@@ -163,10 +172,7 @@ ApplicationWindow {
             anchors.verticalCenter: parent.verticalCenter
 
             MouseArea {
-                onClicked: {
-                    colSpacing = tileWidth.text
-                    rowSpacing = tileHeight.text
-                }
+                onClicked: setTileSize()
                 anchors.fill: parent
             }
         }
