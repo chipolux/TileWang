@@ -8,6 +8,7 @@ ApplicationWindow {
     minimumWidth: 1280
     minimumHeight: 720
 
+    property int fontSize: 14
     property int colSpacing: 16
     property int rowSpacing: 16
     property int cols: tileSet.sourceSize.width / colSpacing
@@ -30,7 +31,7 @@ ApplicationWindow {
         opacity: 0.98
 
         anchors.top: parent.top
-        anchors.bottom: tileSizeRow.bottom
+        anchors.bottom: tileSet.source != "" ? infoColumn.bottom : tileSizeRow.bottom
         anchors.left: parent.left
         anchors.right: parent.right
         anchors.bottomMargin: -15
@@ -42,51 +43,51 @@ ApplicationWindow {
 
         anchors.top: parent.top
         anchors.left: parent.left
-        anchors.margins: 20
+        anchors.margins: 15
 
         Label {
             id: imagePathLabel
             text: {
+                var template = "<b>Image:</b> <font color=\"blue\">%1</font>";
                 if (tileSet.source != "") {
-                    var path = tileSet.source.toString().replace(/^(file:\/{3})/, "")
-                    return "<b>Image:</b> %1".arg(decodeURIComponent(path))
+                    var path = tileSet.source.toString().replace(/^(file:\/{3})/, "");
+                    return template.arg(decodeURIComponent(path));
                 } else {
-                    return "<b>Image:</b> No image loaded..."
+                    return template.arg("No image loaded, click here to load one...");
                 }
+            }
+            font.pixelSize: fontSize
+
+            MouseArea {
+                anchors.fill: parent
+
+                onClicked: fileDialog.open()
             }
         }
 
         Label {
             text: "<b>Size:</b> %1:%2 or %3x%4".arg(cols).arg(rows).arg(tileSet.sourceSize.width).arg(tileSet.sourceSize.height)
             visible: tileSet.source != ""
+            font.pixelSize: fontSize
         }
 
         Label {
             text: "<b>Index:</b> %1".arg(currentIndex)
             visible: tileSet.source != ""
+            font.pixelSize: fontSize
         }
 
         Label {
             text: "<b>Position:</b> %1:%2".arg(currentCol).arg(currentRow)
             visible: tileSet.source != ""
+            font.pixelSize: fontSize
         }
 
         Label {
-            text: "<b>Offset:</b> %1x%2".arg(currentCol * colSpacing).arg(currentRow * rowSpacing)
+            text: "<b>Offset:</b> %1 x %2".arg(currentCol * colSpacing).arg(currentRow * rowSpacing)
             visible: tileSet.source != ""
+            font.pixelSize: fontSize
         }
-    }
-
-    Button {
-        id: loadImageButton
-        text: "Load Image"
-        width: 200
-
-        onClicked: fileDialog.open()
-
-        anchors.top: parent.top
-        anchors.right: parent.right
-        anchors.margins: 10
     }
 
     ComboBox {
@@ -95,8 +96,9 @@ ApplicationWindow {
         currentIndex: 2
         displayText: "Scale: %1x".arg(currentText)
         width: 200
+        font.pixelSize: fontSize
 
-        anchors.top: loadImageButton.bottom
+        anchors.top: parent.top
         anchors.right: parent.right
         anchors.margins: 10
     }
@@ -113,6 +115,7 @@ ApplicationWindow {
             text: "16"
             width: 75
             horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: fontSize
         }
 
         Label {
@@ -120,6 +123,7 @@ ApplicationWindow {
             width: 20
             horizontalAlignment: Text.AlignHCenter
             anchors.verticalCenter: parent.verticalCenter
+            font.pixelSize: fontSize
         }
 
         TextField {
@@ -127,6 +131,7 @@ ApplicationWindow {
             text: "16"
             width: 75
             horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: fontSize
         }
 
         Image {
