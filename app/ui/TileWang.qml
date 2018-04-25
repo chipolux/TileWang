@@ -90,12 +90,29 @@ ApplicationWindow {
         }
     }
 
+    Image {
+        id: reloadButton
+        source: "refresh_black.svg"
+        enabled: tileSet.source != ""
+        opacity: enabled ? 1.0 : 0.5
+        sourceSize.height: scaleSelector.height * 0.8
+
+        MouseArea {
+            onClicked: tileSet.source = fileDialog.fileUrl
+            anchors.fill: parent
+        }
+
+        anchors.verticalCenter: scaleSelector.verticalCenter
+        anchors.right: scaleSelector.left
+        anchors.margins: 10
+    }
+
     ComboBox {
         id: scaleSelector
         model: [0.5, 0.75, 1, 2, 3, 4, 5]
         currentIndex: 2
         displayText: "Scale: %1x".arg(currentText)
-        width: 200
+        width: 195 - reloadButton.width
         font.pixelSize: fontSize
 
         anchors.top: parent.top
@@ -113,7 +130,7 @@ ApplicationWindow {
         TextField {
             id: tileWidth
             text: "16"
-            width: 75
+            width: 70
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: fontSize
         }
@@ -129,15 +146,20 @@ ApplicationWindow {
         TextField {
             id: tileHeight
             text: "16"
-            width: 75
+            width: 70
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: fontSize
         }
 
+        Item {
+            id: tileSizeSpacer
+            width: 8
+            height: 1
+        }
+
         Image {
             source: "done_black.svg"
-            width: 30
-            height: 30
+            sourceSize.height: tileSizeRow.height * 0.8
             anchors.verticalCenter: parent.verticalCenter
 
             MouseArea {
@@ -164,6 +186,7 @@ ApplicationWindow {
         Image {
             id: tileSet
             smooth: false
+            cache: false
             width: sourceSize.width * scaleSelector.currentText
             height: sourceSize.height * scaleSelector.currentText
 
