@@ -80,18 +80,36 @@ ApplicationWindow {
             text: "<b>Index:</b> %1".arg(currentIndex)
             visible: tileSet.source != ""
             font.pixelSize: fontSize
+
+            MouseArea {
+                onClicked: clipboard.setText("%1\n".arg(currentIndex))
+
+                anchors.fill: parent
+            }
         }
 
         Label {
             text: "<b>Position:</b> %1:%2".arg(currentCol).arg(currentRow)
             visible: tileSet.source != ""
             font.pixelSize: fontSize
+
+            MouseArea {
+                onClicked: clipboard.setText("%1\t%2\n".arg(currentCol).arg(currentRow))
+
+                anchors.fill: parent
+            }
         }
 
         Label {
             text: "<b>Offset:</b> %1 x %2".arg(currentCol * colSpacing).arg(currentRow * rowSpacing)
             visible: tileSet.source != ""
             font.pixelSize: fontSize
+
+            MouseArea {
+                onClicked: clipboard.setText("%1\t%2\n".arg(currentCol * colSpacing).arg(currentRow * rowSpacing))
+
+                anchors.fill: parent
+            }
         }
     }
 

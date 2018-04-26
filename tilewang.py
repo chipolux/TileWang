@@ -9,6 +9,8 @@ def run():
     from PyQt5.QtGui import QGuiApplication, QIcon
     from PyQt5.QtQml import QQmlApplicationEngine
 
+    from app.clipboard import Clipboard
+
     app = QGuiApplication(sys.argv)
     app.setWindowIcon(QIcon(os.path.join(UI_DIR, 'icon.ico')))
 
@@ -20,6 +22,10 @@ def run():
     # application it can hang when we close the app if we don't schedule it's
     # deletion for when the app is quitting.
     app.aboutToQuit.connect(engine.deleteLater)
+
+    context = engine.rootContext()
+    clipboard = Clipboard(app)
+    context.setContextProperty('clipboard', clipboard)
 
     engine.load(os.path.join(UI_DIR, 'TileWang.qml'))
     views = engine.rootObjects()
