@@ -140,6 +140,7 @@ ApplicationWindow {
         displayText: "Scale: %1x".arg(currentText)
         width: 190 - reloadButton.width
         font.pixelSize: fontSize
+        popup.font.pixelSize: fontSize
 
         anchors.top: parent.top
         anchors.right: parent.right
