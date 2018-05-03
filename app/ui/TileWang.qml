@@ -121,7 +121,10 @@ ApplicationWindow {
         sourceSize.height: scaleSelector.height * 0.8
 
         MouseArea {
-            onClicked: tileSet.source = fileDialog.fileUrl
+            onClicked: {
+                tileSet.source = "";
+                tileSet.source = fileDialog.fileUrl;
+            }
             anchors.fill: parent
         }
 
