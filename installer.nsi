@@ -92,12 +92,16 @@ Section "!${PRODUCT_NAME}" sec_app
     [% for scname, sc in ib.shortcuts.items() %]
     CreateShortCut "$SMPROGRAMS\[[scname]].lnk" "[[sc['target'] ]]" \
       '[[ sc['parameters'] ]]' "$INSTDIR\[[ sc['icon'] ]]"
+    CreateShortCut "$DESKTOP\[[scname]].lnk" "[[sc['target'] ]]" \
+      '[[ sc['parameters'] ]]' "$INSTDIR\[[ sc['icon'] ]]"
     [% endfor %]
   [% else %]
     [# Multiple shortcuts: create a directory for them #]
     CreateDirectory "$SMPROGRAMS\${PRODUCT_NAME}"
     [% for scname, sc in ib.shortcuts.items() %]
     CreateShortCut "$SMPROGRAMS\${PRODUCT_NAME}\[[scname]].lnk" "[[sc['target'] ]]" \
+      '[[ sc['parameters'] ]]' "$INSTDIR\[[ sc['icon'] ]]"
+    CreateShortCut "$DESKTOP\[[scname]].lnk" "[[sc['target'] ]]" \
       '[[ sc['parameters'] ]]' "$INSTDIR\[[ sc['icon'] ]]"
     [% endfor %]
   [% endif %]
@@ -177,9 +181,13 @@ Section "Uninstall"
   [% if single_shortcut %]
     [% for scname in ib.shortcuts %]
       Delete "$SMPROGRAMS\[[scname]].lnk"
+      Delete "$DESKTOP\[[scname]].lnk"
     [% endfor %]
   [% else %]
     RMDir /r "$SMPROGRAMS\${PRODUCT_NAME}"
+    [% for scname in ib.shortcuts %]
+      Delete "$DESKTOP\[[scname]].lnk"
+    [% endfor %]
   [% endif %]
   [% endblock uninstall_shortcuts %]
   RMDir $INSTDIR
