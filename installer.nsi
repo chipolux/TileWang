@@ -12,7 +12,7 @@
  
 SetCompressor lzma
 
-!define MULTIUSER_EXECUTIONLEVEL Highest
+!define MULTIUSER_EXECUTIONLEVEL Lowest
 !define MULTIUSER_INSTALLMODE_DEFAULT_CURRENTUSER
 !define MULTIUSER_MUI
 !define MULTIUSER_INSTALLMODE_COMMANDLINE
@@ -35,8 +35,6 @@ SetCompressor lzma
 [% if license_file %]
 !insertmacro MUI_PAGE_LICENSE [[license_file]]
 [% endif %]
-!insertmacro MULTIUSER_PAGE_INSTALLMODE
-!insertmacro MUI_PAGE_DIRECTORY
 !insertmacro MUI_PAGE_INSTFILES
 !insertmacro MUI_PAGE_FINISH
 [% endblock ui_pages %]
