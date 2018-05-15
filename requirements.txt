@@ -1,3 +1,2 @@
-pynsist==2.1  # must upgrade installer.nsi when upgrading this
 PyQt5==5.9.2
 sip==4.19.7
